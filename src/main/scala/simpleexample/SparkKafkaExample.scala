@@ -48,7 +48,7 @@ object SparkKafkaExample {
     lines.foreachRDD { rdd =>
       val offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
       offsetRanges.foreach( println(_) )
-    }                         }
+    }
     val words = lines.flatMap(_.split(" "))
     val wordCounts = words.map(x => (x, 1L))
       .reduceByKeyAndWindow(_ + _, _ - _, Minutes(5), Seconds(2), 2)
